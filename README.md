@@ -4,7 +4,7 @@ This is a Laravel 8 project with [Laravel Breeze](https://laravel.com/docs/8.x/s
 
 ## How to use
 
-Code for [Laravel-8-Socialite](https://www.youtube.com/watch?v=r4gHtN_Is4s&list=PLYO5TOinzgTjh0S7EakH2QaUahNb3Yiwz)
+Code for [Laravel-8-Socialite](https://youtu.be/XojfQda_jL8)
 
 - Clone the repository with __git clone__
 - Copy __.env.example__ file to __.env__
