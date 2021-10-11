@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
@@ -25,31 +26,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/auth/github/redirect', function () {
-    return Socialite::driver('github')->redirect();
-});
+Route::get('/auth/{provider}/redirect', [LoginController::class, 'redirectToProvider']);
 
-Route::get('/auth/github/callback', function () {
-    $githubUser = Socialite::driver('github')->user();
-
-    $user = User::firstOrCreate(
-        [
-            'provider_id' => $githubUser->getId()
-        ],
-        [
-            'email' => $githubUser->getEmail(),
-            'name' => $githubUser->getName(),
-        ]
-    );
-    // create a new user in database
-    // $user = User::create([
-    //     'email' => $githubUser->getEmail(),
-    //     'name' => $githubUser->getName(),
-    //     'provider_id' => $githubUser->getId(),
-    // ]);
-    // log the user in
-    auth()->login($user, false);
-
-    // redirect dashboard
-    return redirect('dashboard');
-});
+Route::get('/auth/{provider}/callback', [LoginController::class, 'handleProviderCallback']);
